@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cadastro</title>
+</head>
+<body>
+    <h1>Cadastro</h1>
+    <br>
+      <br>
+    <input type="text" id="campo" placeholder="Nome">
+    <button type="button" class="test">ENVIAR</button>
+    <!-- <button type="button" class="list">LISTAR</button> -->
+
+    <h4><span class="server"></span></h4>
+</body>
+
+<script type="text/javascript">
+
+
+// var form = document.getElementById('formulario');
+
+
+$('.test').click(function() {
+    var campo = $('#campo').val();
+    // abre conexão
+    var socket = new WebSocket('ws://localhost:8001');
+
+    socket.addEventListener('open', function(event){
+        socket.send(campo);
+    });
+
+    socket.addEventListener('message', function (event) {
+      console.log(event.data);
+    });
+
+});
+
+// espera mensagem
+// socket.addEventListener('message', function (event) {
+//       console.log('Message from server ', event);
+//       var server = document.querySelector('.server');
+//       server.innerHTML = event.data;
+//     });
+</script>
+</html>
